@@ -1,9 +1,10 @@
 import styled from "styled-components";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useUser } from "../features/authentication/useUser";
 import Spinner from "./Spinner";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
 
+// Centers content vertically and horizontally on the page
 const FullPage = styled.div`
   height: 100vh;
   background-color: var(--color-grey-50);
@@ -12,21 +13,17 @@ const FullPage = styled.div`
   justify-content: center;
 `;
 
+// Guards routes that require authentication
 function ProtectedRoute({ children }) {
   const navigate = useNavigate();
-
-  // 1. Load the authenticated user
   const { isLoading, isAuthenticated } = useUser();
 
-  // 2. If there is NO authenticated user, redirect to the /login
-  useEffect(
-    function () {
-      if (!isAuthenticated && !isLoading) navigate("/login");
-    },
-    [isAuthenticated, isLoading, navigate]
-  );
+  // Redirect unauthenticated users to login
+  useEffect(() => {
+    if (!isAuthenticated && !isLoading) navigate("/login");
+  }, [isAuthenticated, isLoading, navigate]);
 
-  // 3. While loading, show a spinner
+  // Show spinner while authentication state is loading
   if (isLoading)
     return (
       <FullPage>
@@ -34,8 +31,11 @@ function ProtectedRoute({ children }) {
       </FullPage>
     );
 
-  // 4. If there IS a user, render the app
+  // Render protected content if authenticated
   if (isAuthenticated) return children;
+
+  // Optionally, return null to avoid rendering anything while redirecting
+  return null;
 }
 
 export default ProtectedRoute;

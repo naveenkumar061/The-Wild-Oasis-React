@@ -1,8 +1,10 @@
+import styled from "styled-components";
 import { Outlet } from "react-router-dom";
+
 import Sidebar from "./Sidebar";
 import Header from "./Header";
-import styled from "styled-components";
 
+// App layout using CSS grid: sidebar, header, and main content
 const StyledAppLayout = styled.div`
   display: grid;
   grid-template-columns: 26rem 1fr;
@@ -10,12 +12,14 @@ const StyledAppLayout = styled.div`
   height: 100vh;
 `;
 
+// Main content area styling
 const Main = styled.main`
   background-color: var(--color-grey-50);
   padding: 4rem 4.8rem 6.4rem;
   overflow: scroll;
 `;
 
+// Container to center and space content
 const Container = styled.div`
   max-width: 120rem;
   margin: 0 auto;
