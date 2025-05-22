@@ -67,8 +67,6 @@ npm run dev
 
 ### Project Structure
 
----
-
 /src — main source folder
 
 /pages — React components for each route (Dashboard, Bookings, Users, etc.)
@@ -83,11 +81,7 @@ npm run dev
 
 /styles — global and shared CSS styles
 
----
-
 ### Key Components
-
----
 
 App.jsx
 Sets up React Router with protected and public routes, wraps the app with React Query and dark mode context providers.
@@ -109,5 +103,3 @@ Current user state is managed with a custom useUser hook using React Query
 ProtectedRoute redirects unauthenticated users to the login page
 
 User profile updates (password, avatar, full name) handled via Supabase API
-
----
